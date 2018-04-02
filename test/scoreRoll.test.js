@@ -1,7 +1,7 @@
 let assert = require('assert');
 const scoreRoll = require('../scoreRoll');
 
-describe('input', () => {
+describe('scoreRoll', () => {
   let state;
 
   beforeEach(() => {
@@ -54,5 +54,12 @@ describe('input', () => {
     state = scoreRoll(3, state);
 
     assert.equal(state.score, 20);
+  });
+
+  it.only('returns a score for the first roll after two strikes and a regular roll', () => {
+    state = scoreRoll(10, state);
+    state = scoreRoll(10, state);
+    state = scoreRoll(2, state);
+    assert.equal(state.score, 22);
   });
 });
