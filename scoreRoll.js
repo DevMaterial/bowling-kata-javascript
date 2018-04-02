@@ -15,18 +15,19 @@ function scoreRoll(pins, { score, rolls }) {
     rolls.push(pins);
   }
   
+  let strike = rolls[rolls.length - 4] === 10;
   const lastRoll = rolls[rolls.length - 1];
   let lastLastRoll = rolls[rolls.length - 2];
   const currentFrame = rolls.indexOf(rolls.length - 1);
 
-    if(lastLastRoll == null) {
-      lastLastRoll = rolls[rolls.length - 3];
-    }
+  if (lastLastRoll == null) {
+    lastLastRoll = rolls[rolls.length - 3];
+    strike = rolls[rolls.length - 5] === 10
+  }
   
   if (currentFrame % 2 !== 0) { // odd 
-    if (rolls[rolls.length - 5] === 10) { // strike
-      score += 10 + lastRoll + lastLastRoll;
-      // score += 10 + lastRoll + lastLastRoll + (lastRoll + lastLastRoll);
+    if (strike) { // strike
+      score += 10 + lastRoll + lastLastRoll + (lastRoll + lastLastRoll);
     }
   }
   console.log('last roll', lastRoll);
